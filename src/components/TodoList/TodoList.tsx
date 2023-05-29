@@ -4,14 +4,17 @@ export type TasksType = {
   id: number
   title: string
   isDone: boolean
-} 
+}
 
 type PropsType = {
   title: string
   tasks: Array<TasksType>
 }
 
-function TodoList(props:PropsType) {
+function TodoList(props: PropsType) {
+  const removeTask = (id:number) => {
+    props.tasks.filter(el => { el.id !== id })
+  }
   return (
     <div>
       <h2>{props.title}</h2>
@@ -20,9 +23,13 @@ function TodoList(props:PropsType) {
       </div>
       <div>
         <ul>
-          <li><input type="checkbox" checked={props.tasks[0].isDone}/><span>{props.tasks[0].title}</span></li>
-          <li><input type="checkbox" checked={props.tasks[1].isDone}/><span>{props.tasks[1].title}</span></li>
-          <li><input type="checkbox" checked={props.tasks[2].isDone}/><span>{props.tasks[2].title}</span></li>
+          {props.tasks.map(input => {
+            return <li>
+              <input type="checkbox" checked={input.isDone} />
+              <span>{input.title}</span>
+              <button onClick={() => {removeTask(input.id)}}>-</button>
+            </li>
+          })}
         </ul>
       </div>
       <div>
