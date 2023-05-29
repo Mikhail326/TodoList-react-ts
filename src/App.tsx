@@ -1,25 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-<<<<<<< HEAD
-import TodoList from './components/TodoList/TodoList';
-
-const tasks1 = [
-  {id: 1, title:'js', isDone: true},
-  {id: 2, title:'CSS', isDone: true},
-  {id: 3, title:'HTML', isDone: false}
-]
-
-const tasks2 = [
-  {id: 1, title:'No js', isDone: true},
-  {id: 2, title:'No CSS', isDone: false},
-  {id: 3, title:'No HTML', isDone: true}
-]
-=======
 import TodoList, { TasksType } from './components/TodoList/TodoList';
 import { v1 } from 'uuid';
 
 export type TypeFilterTask = 'all' | 'completed' | 'active'
->>>>>>> refs/remotes/origin/master
 
 function App() {
 

@@ -16,11 +16,6 @@ type PropsType = {
 }
 
 function TodoList(props: PropsType) {
-<<<<<<< HEAD
-  const removeTask = (id:number) => {
-    props.tasks.filter(el => { el.id !== id })
-  }
-=======
 
   const [titleNewtask, setTitleNewTask] = useState('')
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +35,6 @@ function TodoList(props: PropsType) {
   const changeStatusFilterActive = () => props.changeStatusFilter('active')
   const changeStatusFilterCompleted = () => props.changeStatusFilter('completed')
 
->>>>>>> refs/remotes/origin/master
   return (
     <div>
       <h2>{props.title}</h2>
@@ -50,13 +44,6 @@ function TodoList(props: PropsType) {
       </div>
       <div>
         <ul>
-<<<<<<< HEAD
-          {props.tasks.map(input => {
-            return <li>
-              <input type="checkbox" checked={input.isDone} />
-              <span>{input.title}</span>
-              <button onClick={() => {removeTask(input.id)}}>-</button>
-=======
           {props.tasks.map(t => {
             const removeTaskHandler = () => {
               props.removeTask(t.id)
@@ -64,7 +51,6 @@ function TodoList(props: PropsType) {
             return <li key={t.id}><input type="checkbox" checked={t.isDone} />
               <span>{t.title}</span>
               <button onClick={removeTaskHandler}>-</button>
->>>>>>> refs/remotes/origin/master
             </li>
           })}
         </ul>
