@@ -11,10 +11,11 @@ type PropsType = {
   title: string
   tasks: Array<TasksType>
   filter:TypeFilterTask
-  removeTask: (id: string) => void
-  changeStatusFilter: (status: TypeFilterTask) => void
-  addTask: (title: string) => void
-  changeTaskStatus: (id: string, status: boolean) => void
+  id: string
+  removeTask: (id: string, idTodoList:string) => void
+  changeStatusFilter: (status: TypeFilterTask,idTodoList:string) => void
+  addTask: (title: string, idTodoList:string) => void
+  changeTaskStatus: (id: string, status: boolean, idTodoList:string) => void
 }
 
 function TodoList(props: PropsType) {
@@ -28,21 +29,21 @@ function TodoList(props: PropsType) {
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     setError('')
     if (e.charCode === 13) {
-      props.addTask(titleNewtask)
+      props.addTask(titleNewtask, props.id)
       setTitleNewTask('')
     }
   }
   const addTask = () => {
    if(titleNewtask.trim() !== '') {
-    props.addTask(titleNewtask)
+    props.addTask(titleNewtask, props.id)
     setTitleNewTask('')
    } else {
     setError('Titlte is required')
    }
   }
-  const changeStatusFilterAll = () => props.changeStatusFilter('all')
-  const changeStatusFilterActive = () => props.changeStatusFilter('active')
-  const changeStatusFilterCompleted = () => props.changeStatusFilter('completed')
+  const changeStatusFilterAll = () => props.changeStatusFilter('all', props.id)
+  const changeStatusFilterActive = () => props.changeStatusFilter('active', props.id)
+  const changeStatusFilterCompleted = () => props.changeStatusFilter('completed', props.id)
 
   return (
     <div>
@@ -59,10 +60,10 @@ function TodoList(props: PropsType) {
         <ul>
           {props.tasks.map(t => {
             const removeTaskHandler = () => {
-              props.removeTask(t.id)
+              props.removeTask(t.id, props.id)
             }
             const changeTaskStatusHander = (e: ChangeEvent<HTMLInputElement>) => {
-              props.changeTaskStatus(t.id, e.currentTarget.checked)
+              props.changeTaskStatus(t.id, e.currentTarget.checked, props.id)
             }
             return <li key={t.id} className={t.isDone ? 'is-done': ''}><input type="checkbox" checked={t.isDone} onChange={changeTaskStatusHander} />
               <span>{t.title}</span>
