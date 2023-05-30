@@ -32,6 +32,14 @@ function App() {
     setTasks1(newArrTasks)
   }
 
+  const changeTaskStatus = (id:string, status: boolean) => {
+    const task = tasks1.find(el => el.id === id)
+    if(task) {
+      task.isDone = status
+    }
+    setTasks1([...tasks1])
+  }
+
   if (filter === 'completed') {
     tasksForTodolist = tasks1.filter(el => el.isDone)
   }
@@ -46,6 +54,8 @@ function App() {
         removeTask={removeTask}
         changeStatusFilter={changeStatusFilter}
         addTask = {addTask}
+        changeTaskStatus={changeTaskStatus}
+        filter={filter}
       />
     </div>
   );
