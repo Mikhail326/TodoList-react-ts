@@ -1,9 +1,11 @@
 .App {
+  margin-left: 200px;
   text-align: center;
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
+  gap: 200px;
 }
 .error {
   border: 1px solid red;
