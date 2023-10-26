@@ -2,6 +2,8 @@ import React, { ChangeEvent } from 'react';
 import { TypeFilterTask } from '../../App';
 import InputAddItemForm from '../InputAddItemForm/InputAddItemForm';
 import EditableItem from '../EditableItem/EditableItem';
+import { Button, Checkbox, IconButton } from '@mui/material';
+import { VerifiedOutlined, Delete, Verified} from '@mui/icons-material';
 
 export type TasksType = {
   id: string
@@ -20,7 +22,7 @@ type PropsType = {
   changeTaskStatus: (id: string, status: boolean, idTodoList: string) => void
   removeTodoList: (idTodoList: string) => void
   changeTitleTask: (id: string, newTitleTask: string, idTodoList: string) => void
-  changeTodoListTitle: (newTitle: string, idTodoList:string) => void
+  changeTodoListTitle: (newTitle: string, idTodoList: string) => void
 }
 
 function TodoList(props: PropsType) {
@@ -52,26 +54,34 @@ function TodoList(props: PropsType) {
             const removeTaskHandler = () => {
               props.removeTask(t.id, props.id)
             }
-            const changeTaskStatusHander = (e: ChangeEvent<HTMLInputElement>) => {
+            const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
               props.changeTaskStatus(t.id, e.currentTarget.checked, props.id)
             }
             const changeTitleTask = (newTitleTask: string) => {
               props.changeTitleTask(t.id, newTitleTask, props.id)
             }
-            return <li key={t.id} className={t.isDone ? 'is-done' : ''}><input type="checkbox" checked={t.isDone} onChange={changeTaskStatusHander} />
+            return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
+              <Checkbox
+                onChange={changeTaskStatusHandler}
+                checked={t.isDone}
+                icon={<VerifiedOutlined />}
+                checkedIcon={<Verified />}
+              />
               <EditableItem title={t.title} changeTitle={changeTitleTask} />
-              <button onClick={removeTaskHandler}>-</button>
+              <IconButton aria-label="delete" size="small" onClick={removeTaskHandler}>
+                <Delete fontSize="inherit" />
+              </IconButton>
             </li>
           })}
         </ul>
       </div>
       <div>
-        <button className={props.filter === 'all' ? 'active-status-filter' : ''}
-          onClick={changeStatusFilterAll}>All</button>
-        <button className={props.filter === 'active' ? 'active-status-filter' : ''}
-          onClick={changeStatusFilterActive}>Active</button>
-        <button className={props.filter === 'completed' ? 'active-status-filter' : ''}
-          onClick={changeStatusFilterCompleted}>Completed</button>
+        <Button variant={props.filter === 'all' ? 'contained' : 'outlined'}
+          onClick={changeStatusFilterAll}>All</Button>
+        <Button variant={props.filter === 'active' ? 'contained' : 'outlined'}
+          onClick={changeStatusFilterActive}>Active</Button>
+        <Button variant={props.filter === 'completed' ? 'contained' : 'outlined'}
+          onClick={changeStatusFilterCompleted}>Completed</Button>
       </div>
     </div>
   );

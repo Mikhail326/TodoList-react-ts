@@ -1,3 +1,4 @@
+import { Button, Input } from '@mui/material';
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 type PropsInputItemFormType = {
@@ -18,7 +19,7 @@ function InputAddItemForm(props: PropsInputItemFormType) {
     setError('')
     if (e.charCode === 13 && titleNewTask !== '') {
       addTask()
-    } 
+    }
   }
 
   const addTask = () => {
@@ -32,12 +33,12 @@ function InputAddItemForm(props: PropsInputItemFormType) {
 
   return (
     <div>
-      <input value={titleNewTask}
-        onChange={onChangeHandler}
-        onKeyPress={onKeyPressHandler}
-        className={error ? 'error' : ''}
-      />
-      <button onClick={addTask}>+</button>
+      <Input placeholder="Add task" 
+      error={!!error}
+      value={titleNewTask} 
+      onChange={onChangeHandler} 
+      onKeyPress={onKeyPressHandler} />
+      <Button variant={'contained'} color={'primary'} onClick={addTask}>+</Button>
       {error && <div className='error-message' >{error}</div>}
     </div>
   );
