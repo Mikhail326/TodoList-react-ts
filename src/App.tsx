@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
-import TodoList from './components/TodoList/TodoList';
+import TodoList, { TasksType } from './components/TodoList/TodoList';
 import { v1 } from 'uuid';
 import InputAddItemForm from './components/InputAddItemForm/InputAddItemForm';
 
 export type TypeFilterTask = 'all' | 'completed' | 'active'
 export type TypeTodoList = { id: string, title: string, filter: TypeFilterTask }
+export type TypeArrayTasks = {
+  [key:string]: Array<TasksType>
+}
 
 function App() {
 
@@ -48,7 +51,7 @@ function App() {
     { id: todoListTaskId2, title: 'React-todolist-2', filter: 'active' }
   ])
 
-  const [tasks, setTasks] = useState({
+  const [tasks, setTasks] = useState<TypeArrayTasks>({
     [todoListTaskId1]: [
       { id: v1(), title: 'js', isDone: true },
       { id: v1(), title: 'CSS', isDone: false },

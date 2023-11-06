@@ -1,4 +1,4 @@
-import { AddTodoListAC, RemoveTodoListAC, ChangeTitleTodoListAC, ChangeFilterTodoListAC } from './todolist-reducer';
+import { addTodoListAC, removeTodoListAC, changeTitleTodoListAC, changeFilterTodoListAC } from './todolist-reducer';
 import { v1 } from 'uuid';
 import { TypeTodoList, TypeFilterTask } from './../App';
 import { todoListReducer } from './todolist-reducer';
@@ -18,7 +18,7 @@ test('correct should add todo list', () => {
     { id: todoListTaskId2, title: 'React-todolist-2', filter: 'active' }
   ])
 
-  const action = AddTodoListAC(newTodoListTitle)
+  const action = addTodoListAC(newTodoListTitle)
   const endState = <EndStateType>todoListReducer(startState, action)
 
   expect(endState.length).toBe(3)
@@ -36,7 +36,7 @@ test('correct remove todo list', () => {
     { id: todoListTaskId2, title: 'React-todolist-2', filter: 'active' }
   ])
 
-  const action = RemoveTodoListAC(todoListTaskId1)
+  const action = removeTodoListAC(todoListTaskId1)
 
   const endState = <EndStateType>todoListReducer(startState, action)
 
@@ -56,7 +56,7 @@ test('correct change title todo list', () => {
     { id: todoListTaskId2, title: 'React-todolist-2', filter: 'active' }
   ])
 
-  const action = ChangeTitleTodoListAC(todoListTaskId1, newTitle)
+  const action = changeTitleTodoListAC(todoListTaskId1, newTitle)
 
   const endState = <EndStateType>todoListReducer(startState, action)
 
@@ -77,7 +77,7 @@ test('correct change filter todo list', () => {
     { id: todoListTaskId2, title: 'React-todolist-2', filter: 'active' }
   ])
 
-  const action = ChangeFilterTodoListAC(todoListTaskId1, newFilter)
+  const action = changeFilterTodoListAC(todoListTaskId1, newFilter)
 
   const endState = <EndStateType>todoListReducer(startState, action)
 
